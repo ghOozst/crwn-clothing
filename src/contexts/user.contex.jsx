@@ -1,4 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import {
+  createUserDocumentFromAuth,
+  onAuthStateChangeListener,
+} from '../utils/firebase/firebase.utils';
 
 //Here is where the actual data is stored
 export const UserContext = createContext({
@@ -12,6 +16,12 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangeListener((user) => {
+      if (user) createUserDocumentFromAuth(user);
+      setCurrentUser(user);
+    });
+  }, []);
   /*The value props allows the currentState and the setUserState to be used by
   the children*/
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
