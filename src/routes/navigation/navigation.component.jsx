@@ -6,6 +6,8 @@ import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import './navigation.styles.scss';
 import { UserContext } from '../../contexts/user.contex';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
+import CartIcon from '../../components/cart-icon/cart-icon.component';
+import CartDropDown from '../../components/cart-dropdown/cart-dropdown.component';
 
 const Navigation = () => {
   /*The code code of this function will be re-run just because the useContext will
@@ -32,6 +34,10 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
+          {/*<div>
+            <CartDropDown />
+          </div>*/}
         </div>
       </div>
       <Outlet />
