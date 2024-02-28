@@ -16,8 +16,12 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
 
+  //This only runs one time when the component is mounted
   useEffect(() => {
+    /*onAuthStateChangeListener passes the code we want to run  every time the 
+    user changes */
     const unsubscribe = onAuthStateChangeListener((user) => {
+      //If the there is a user logged in create a document in the database
       if (user) createUserDocumentFromAuth(user);
       setCurrentUser(user);
     });
