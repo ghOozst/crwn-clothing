@@ -8,12 +8,14 @@ import { UserContext } from '../../contexts/user.contex';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropDown from '../../components/cart-dropdown/cart-dropdown.component';
+import { CartContext } from '../../contexts/cart.context';
 
 const Navigation = () => {
   /*The code code of this function will be re-run just because the useContext will
   is used here, but it will not re-render until the values of
   the context  change*/
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -35,9 +37,7 @@ const Navigation = () => {
             </Link>
           )}
           <CartIcon />
-          {/*<div>
-            <CartDropDown />
-          </div>*/}
+          <div>{isCartOpen && <CartDropDown />}</div>
         </div>
       </div>
       <Outlet />
