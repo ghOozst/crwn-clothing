@@ -1,13 +1,15 @@
 import { Fragment, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 
-import { UserContext } from '../../contexts/user.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropDown from '../../components/cart-dropdown/cart-dropdown.component';
+
 import { CartContext } from '../../contexts/cart.context';
+import { selectCurrentUser } from '../../store/user/user.selector.js';
 
 import {
   LogoContainer,
@@ -17,10 +19,11 @@ import {
 } from './navigation.styles.jsx';
 
 const Navigation = () => {
+  const currentUser = useSelector(selectCurrentUser);
+
   /*The code code of this function will be re-run just because the useContext will
   is used here, but it will not re-render until the values of
   the context  change*/
-  const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
   return (
