@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { UseDispatch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
   createUserDocumentFromAuth,
@@ -16,13 +16,14 @@ import { setCurrentUser } from './store/user/user.action';
 const App = () => {
   const dispatch = useDispatch();
 
+  //Getting the current user
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
       if (user) createUserDocumentFromAuth(user);
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
